@@ -4,33 +4,37 @@ import axios from "axios";
 import { useAuth } from "../../authcontext";
 import { PageHeader } from "@primer/react/experimental";
 import { Box, Button } from "@primer/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./auth.css";
 import logo from "../../assets/github-mark-white.svg";
 
 const Login = () => {
-
   const { setCurrentUser } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      const res = await axios.post("http://54.235.9.54:3002/login", {
+      const res = await axios.post("http://18.233.89.91/login", {
         email,
         password,
       });
+
+      // ✅ Save auth data
       localStorage.setItem("userId", res.data.userId);
       localStorage.setItem("token", res.data.token);
 
       setCurrentUser(res.data.userId);
-      setLoading(false);
 
-      window.location.href = "/";
+      // ✅ React navigation (better than reload)
+      navigate("/");
+
     } catch (err) {
       console.error(err);
       alert("Login failed");
@@ -45,6 +49,7 @@ const Login = () => {
         <div className="login-logo-container">
           <img className="logo-login" src={logo} alt="GitHub logo" />
         </div>
+
         <div className="login-heading">
           <Box>
             <PageHeader>
@@ -54,7 +59,8 @@ const Login = () => {
             </PageHeader>
           </Box>
         </div>
-        <div className="login-box">
+
+        <form className="login-box" onSubmit={handleLogin}>
           <label className="label">Email address</label>
           <input
             className="input"
@@ -62,6 +68,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <label className="label">Password</label>
           <input
             className="input"
@@ -69,14 +76,16 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <Button
             className="login-button"
-            onClick={handleLogin}
             disabled={loading}
+            type="submit"
           >
             {loading ? "Logging in..." : "Login"}
           </Button>
-        </div>
+        </form>
+
         <div className="pass-box">
           Need an account? <Link to="/signup">Sign Up</Link>
         </div>

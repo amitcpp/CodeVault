@@ -19,7 +19,7 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://54.235.9.54:3002/signup", {// problem 
+      const res = await axios.post("http://318.233.89.91/signup", {// problem 
         username,
         email,
         password,

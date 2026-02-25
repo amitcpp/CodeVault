@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token"); // if you are using JWT
+    navigate("/login");
+  };
+
   return (
     <nav>
       <Link to="/">
@@ -14,9 +22,15 @@ const Navbar = () => {
           <h3>Github</h3>
         </div>
       </Link>
+
       <div>
         <Link to="/create"><p>Create a Repository</p></Link>
         <Link to="/profile"><p>Profile</p></Link>
+
+        {/* 🔥 Logout button */}
+        <p onClick={handleLogout} style={{ cursor: "pointer" }}>
+          Logout
+        </p>
       </div>
     </nav>
   );
