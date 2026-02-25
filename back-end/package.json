@@ -1,0 +1,28 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Amit Dey",
+  "license": "ISC",
+  "description": "Git Clone",
+  "dependencies": {
+    "aws": "^0.0.3-2",
+    "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^3.0.3",
+    "body-parse": "^0.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^6.21.0",
+    "mongoose": "^8.16.1",
+    "sdk": "^0.0.0",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.1.0",
+    "yargs": "^18.0.0"
+  }
+}
